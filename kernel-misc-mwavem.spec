@@ -13,6 +13,7 @@ Release:	%{_rel}@%{_kernel_ver_str}
 License:	GPL
 Group:		Base/Kernel
 Source0:	ftp://www-126.ibm.com/pub/acpmodem/%{version}/%{_orig_name}-%{version}.tar.gz
+# Source0-md5:	22cd78ade480db8ab5f0d1ca4dee07ec
 URL:		http://oss.software.ibm.com/acpmodem/
 %{!?_without_dist_kernel:BuildRequires:         kernel-headers}
 BuildRequires:	%{kgcc_package}
