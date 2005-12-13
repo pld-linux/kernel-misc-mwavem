@@ -15,10 +15,10 @@ Group:		Base/Kernel
 Source0:	ftp://www-126.ibm.com/pub/acpmodem/%{version}/%{_orig_name}-%{version}.tar.gz
 # Source0-md5:	22cd78ade480db8ab5f0d1ca4dee07ec
 URL:		http://oss.software.ibm.com/acpmodem/
-%{!?_without_dist_kernel:BuildRequires:	kernel-headers}
 BuildRequires:	%{kgcc_package}
 BuildRequires:	autoconf
 BuildRequires:	automake
+%{!?_without_dist_kernel:BuildRequires:	kernel-headers}
 BuildRequires:	rpmbuild(macros) >= 1.118
 %{!?_without_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
@@ -114,6 +114,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -n %{_orig_name}
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog FAQ README README.devfs doc/mwave.txt
-%config(noreplace,missingok) %verify(not size mtime md5) %{_sysconfdir}/*
+%config(noreplace,missingok) %verify(not md5 mtime size) %{_sysconfdir}/*
 %attr(755,root,root) %{_bindir}/%{_orig_name}
 %{_datadir}/%{_orig_name}
