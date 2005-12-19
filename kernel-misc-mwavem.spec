@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# _without_dist_kernel          without distribution kernel
+%bcond_without	dist_kernel	# without distribution kernel
 #
 %define		_orig_name	mwavem
 %define		_rel		0.1
@@ -18,9 +18,9 @@ URL:		http://oss.software.ibm.com/acpmodem/
 BuildRequires:	%{kgcc_package}
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{!?_without_dist_kernel:BuildRequires:	kernel-headers}
+%{?with_dist_kernel:BuildRequires:	kernel-headers}
 BuildRequires:	rpmbuild(macros) >= 1.118
-%{!?_without_dist_kernel:%requires_releq_kernel_up}
+%{?with_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
 Provides:	kernel-mwavem-%{_rel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -36,7 +36,7 @@ Summary:	Kernel SMP module - ACP Modem driver
 Summary(pl):	Modu³ j±dra SMP - sterownik do modemu ACP
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
-%{!?_without_dist_kernel:%requires_releq_kernel_smp}
+%{?with_dist_kernel:%requires_releq_kernel_smp}
 Requires(post,postun):	/sbin/depmod
 Provides:	kernel-mwavem-%{_rel}
 
@@ -50,8 +50,8 @@ Provides:	kernel-mwavem-%{_rel}
 Summary:	mwavem - utils
 Summary(pl):	mwavem - marzêdzia
 Release:	%{_rel}
-%{!?_without_dist_kernel:%requires_releq_kernel_smp}
 Group:		Base/Kernel
+%{?with_dist_kernel:%requires_releq_kernel_smp}
 Requires:	kernel-mwavem = %{_rel}
 
 %description -n %{_orig_name}
@@ -73,18 +73,22 @@ Requires:	kernel-mwavem = %{_rel}
 
 cd src/drivers
 
-%{__make} CC="%{kgcc} -D__SMP__"
+%{__make} \
+	CC="%{kgcc} -D__SMP__"
 
 mv -f mwavedd.o mwavedd.o.smp.o
 
-%{__make} CC="%{kgcc}"
+%{__make} \
+	CC="%{kgcc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/misc
 install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/misc
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
 cp src/drivers/mwavedd.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/misc
 cp src/drivers/mwavedd.o.smp.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/misc/%{_orig_name}.o
 
