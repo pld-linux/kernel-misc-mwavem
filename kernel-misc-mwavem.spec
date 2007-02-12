@@ -6,7 +6,7 @@
 %define		_rel		0.1
 
 Summary:	Kernel module - ACP Modem driver
-Summary(pl):	Modu³ j±dra - sterownik do modemu ACP
+Summary(pl.UTF-8):   ModuÅ‚ jÄ…dra - sterownik do modemu ACP
 Name:		kernel-misc-%{_orig_name}
 Version:	1.0.4
 Release:	%{_rel}@%{_kernel_ver_str}
@@ -28,12 +28,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 %{_orig_name} - ACP Modem driver for Linux.
 
-%description -l pl
+%description -l pl.UTF-8
 %{_orig_name} - sterownik do modemu ACP dla Linuksa.
 
 %package -n kernel-smp-misc-%{_orig_name}
 Summary:	Kernel SMP module - ACP Modem driver
-Summary(pl):	Modu³ j±dra SMP - sterownik do modemu ACP
+Summary(pl.UTF-8):   ModuÅ‚ jÄ…dra SMP - sterownik do modemu ACP
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_smp}
@@ -43,12 +43,12 @@ Provides:	kernel-mwavem-%{_rel}
 %description -n kernel-smp-misc-%{_orig_name}
 %{_orig_name} - ACP Modem driver for Linux SMP.
 
-%description -n kernel-smp-misc-%{_orig_name} -l pl
+%description -n kernel-smp-misc-%{_orig_name} -l pl.UTF-8
 %{_orig_name} - sterownik do modemu ACP dla Linuksa SMP.
 
 %package -n %{_orig_name}
 Summary:	mwavem - utils
-Summary(pl):	mwavem - marzêdzia
+Summary(pl.UTF-8):   mwavem - marzÄ™dzia
 Release:	%{_rel}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_smp}
@@ -57,8 +57,8 @@ Requires:	kernel-mwavem = %{_rel}
 %description -n %{_orig_name}
 %{_orig_name} - ACP Modem utils.
 
-%description -n %{_orig_name} -l pl
-%{_orig_name} - narzêdzia do modemu ACP.
+%description -n %{_orig_name} -l pl.UTF-8
+%{_orig_name} - narzÄ™dzia do modemu ACP.
 
 %prep
 %setup -q -n %{_orig_name}-%{version}
